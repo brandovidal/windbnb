@@ -6,6 +6,10 @@ function App () {
     <main>
       <h1>
         <img src="logo.png" alt="windbnb" />
+
+        <aside>
+          
+        </aside>
       </h1>
     </main>
   )
