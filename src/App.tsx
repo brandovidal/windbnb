@@ -28,26 +28,31 @@ function App () {
   const locationRef = useRef<HTMLDivElement>(null)
   const guestRef = useRef<HTMLDivElement>(null)
 
-  const [location, setLocation] = useState('')
   const [adults, setAdults] = useState(0)
   const [children, setChildren] = useState(0)
 
+  const [location, setLocation] = useState('')
+  const [guests, setGuests] = useState(0)
   const [stayList, setStayList] = useState(INITIAL_STAYS)
 
   function addAdultsHandle () {
     setAdults(adults + 1)
+    setGuests(guests + 1)
   }
   function substractAdultsHandle () {
     if (adults === 0) return
     setAdults(adults - 1)
+    setGuests(guests - 1)
   }
 
   function addChildrenHandle () {
     setChildren(children + 1)
+    setGuests(guests + 1)
   }
   function substractChildrenHandle () {
     if (children === 0) return
     setChildren(children - 1)
+    setGuests(guests - 1)
   }
 
   const showFilterClickHandle = () => {
@@ -73,6 +78,7 @@ function App () {
     toogleElement({ element: filterRef, show: false })
   }
   const searchFiltersClickHandle = () => {
+    console.log({ location, guests })
     closeClickHandle()
   }
 
@@ -120,11 +126,11 @@ function App () {
             <div className="card filter">
               <div className="item" onClick={showLocationHandle}>
                 <label>location</label>
-                <p className="location">{location ? `${location} , ${country}` : 'Add Location'}</p>
+                <p className="location">{location ? `${location}, ${country}` : 'Add Location'}</p>
               </div>
               <div className="item" onClick={showGuestHandle}>
                 <label>guest</label>
-                <p className="guest">Add guests</p>
+                <p className="guest">{guests ? `${guests} guests` : 'Add guests'}</p>
               </div>
             </div>
           </div>
