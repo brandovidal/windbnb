@@ -1,4 +1,7 @@
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
+
+import INITIAL_STAYS from './data/stays.json'
+const COUNTRY = 'Finland'
 
 import './App.css'
 
@@ -17,12 +20,19 @@ function toogleElement ({ element, show = true }: ToogleElement) {
 }
 
 function App () {
+  // get data
+  const country = COUNTRY
+  const locations = useMemo(() => [...new Set(INITIAL_STAYS.map(stay => stay.city))], [])
+
   const filterRef = useRef<HTMLElement>(null)
   const locationRef = useRef<HTMLDivElement>(null)
   const guestRef = useRef<HTMLDivElement>(null)
 
+  const [location, setLocation] = useState('')
   const [adults, setAdults] = useState(0)
   const [children, setChildren] = useState(0)
+
+  const [stayList, setStayList] = useState(INITIAL_STAYS)
 
   function addAdultsHandle () {
     setAdults(adults + 1)
@@ -43,13 +53,17 @@ function App () {
   const showFilterClickHandle = () => {
     toogleElement({ element: filterRef, show: true })
   }
-  const locationClickHandle = () => {
+  const showLocationHandle = () => {
     toogleElement({ element: locationRef, show: true })
     toogleElement({ element: guestRef, show: false })
   }
-  const guestClickHandle = () => {
+  const showGuestHandle = () => {
     toogleElement({ element: guestRef, show: true })
     toogleElement({ element: locationRef, show: false })
+  }
+
+  const selectLocationHandle = (location: string) => () => {
+    setLocation(location)
   }
 
   const searchClickHandle = () => {
@@ -59,7 +73,7 @@ function App () {
     toogleElement({ element: filterRef, show: false })
   }
   const searchFiltersClickHandle = () => {
-    toogleElement({ element: filterRef, show: false })
+    closeClickHandle()
   }
 
   return (
@@ -104,17 +118,17 @@ function App () {
           </div>
           <div className="item">
             <div className="card filter">
-              <div className="item" onClick={locationClickHandle}>
+              <div className="item" onClick={showLocationHandle}>
                 <label>location</label>
-                <p className="location">Helsinki, Finland</p>
+                <p className="location">{location ? `${location} , ${country}` : 'Add Location'}</p>
               </div>
-              <div className="item" onClick={guestClickHandle}>
+              <div className="item" onClick={showGuestHandle}>
                 <label>guest</label>
                 <p className="guest">Add guests</p>
               </div>
             </div>
           </div>
-          <div className="item">
+          <div className="item search-item">
             <button className="btn-primary" title='Search' onClick={searchFiltersClickHandle}>
               <svg xmlns="http://www.w3.org/2000/svg" className="icon-searc primary" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="2"
                 strokeLinecap="round" strokeLinejoin="round">
@@ -127,24 +141,19 @@ function App () {
           </div>
           <div ref={locationRef} className="item">
             <section className='location-container'>
-              <div className="item">
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon-map" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none"
-                  strokeLinecap="round" strokeLinejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M18.364 4.636a9 9 0 0 1 .203 12.519l-.203 .21l-4.243 4.242a3 3 0 0 1 -4.097 .135l-.144 -.135l-4.244 -4.243a9 9 0 0 1 12.728 -12.728zm-6.364 3.364a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z"
-                    strokeWidth="0" fill="currentColor" />
-                </svg>
-                <p className="value">Helsinki, Finland</p>
-              </div>
-              <div className="item">
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon-map" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none"
-                  strokeLinecap="round" strokeLinejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M18.364 4.636a9 9 0 0 1 .203 12.519l-.203 .21l-4.243 4.242a3 3 0 0 1 -4.097 .135l-.144 -.135l-4.244 -4.243a9 9 0 0 1 12.728 -12.728zm-6.364 3.364a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z"
-                    strokeWidth="0" fill="currentColor" />
-                </svg>
-                <p className="value">Turku, Finland</p>
-              </div>
+              {
+                locations.map((location, index) => (
+                  <div className="item" key={index} onClick={selectLocationHandle(location)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="icon-map" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none"
+                      strokeLinecap="round" strokeLinejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M18.364 4.636a9 9 0 0 1 .203 12.519l-.203 .21l-4.243 4.242a3 3 0 0 1 -4.097 .135l-.144 -.135l-4.244 -4.243a9 9 0 0 1 12.728 -12.728zm-6.364 3.364a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z"
+                        strokeWidth="0" fill="currentColor" />
+                    </svg>
+                    <p className="value">{location}, {country}</p>
+                  </div>
+                ))
+              }
             </section>
           </div>
           <div ref={guestRef} className="item hidden">
@@ -178,44 +187,32 @@ function App () {
           <p className="stays">12+ stays</p>
         </div>
         <section className="stay-container">
-          <div className="item">
-            <img src="https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2255&q=80" alt="" className="image" />
-            <article>
-              <div className="tag">
-                <label className="badge">Super host</label>
-                <p className="description">Entire apartment . 2 beds</p>
-              </div>
-              <div className="rating">
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon-star" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="none" fill="none"
-                  strokeLinecap="round" strokeLinejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
-                    strokeWidth="0" fill="currentColor" />
-                </svg>
-                <span>4.40</span>
-              </div>
-            </article>
-            <h5 className="title">Stylist apartment in center of the city</h5>
-          </div>
-          <div className="item">
-            <img src="https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2255&q=80" alt="" className="image" />
-            <article>
-              <div className="tag">
-                <label className="badge">Super host</label>
-                <p className="description">Entire apartment . 2 beds</p>
-              </div>
-              <div className="rating">
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon-star" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="none" fill="none"
-                  strokeLinecap="round" strokeLinejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
-                    strokeWidth="0" fill="currentColor" />
-                </svg>
-                <span>4.40</span>
-              </div>
-            </article>
-            <h5 className="title">Stylist apartment in center of the city</h5>
-          </div>
+          {
+            stayList.map((stay, index) =>
+            (<div key={index} className="item">
+              <img src={stay.photo} alt={stay.title} className="image" />
+              <article>
+                <div className="tag">
+                  {stay.superHost && (<label className="badge">Super host</label>)}
+                  <p className="description">
+                    {stay.type}
+                    {stay.beds && (<span>{` . ${stay.beds} ${stay.beds === 1 ? 'bed' : ' beds'}`}</span>)}
+                  </p>
+                </div>
+                <div className="rating">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="icon-star" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="none" fill="none"
+                    strokeLinecap="round" strokeLinejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                      strokeWidth="0" fill="currentColor" />
+                  </svg>
+                  <span>{stay.rating}</span>
+                </div>
+              </article>
+              <h5 className="title">{stay.title}</h5>
+            </div>)
+            )
+          }
         </section>
       </main>
 
