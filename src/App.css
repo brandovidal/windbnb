@@ -31,14 +31,14 @@ p {
   margin-bottom: 1rem;
 
   border-radius: 16px;
-  background: #fff;
+  background-color: var(--background);
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.1);
 }
 .card > .item {
   padding: 1rem;
 }
 .card > .item > label {
-  color: #333;
+  color: var(--text-main);
   font-family: Mulish;
   font-size: 9px;
   font-style: normal;
@@ -47,7 +47,7 @@ p {
   text-transform: uppercase;
 }
 .card > .item .location {
-  color: #333;
+  color: var(--text-main);
   font-family: Mulish;
   font-size: 14px;
   font-style: normal;
@@ -127,21 +127,21 @@ p {
 }
 .icon-search.primary {
   width: 17px;
-  stroke: #fff;
+  stroke: var(--text-bright);
 }
 .icon-close {
   width: 24px;
-  stroke: #333333;
+  stroke: var(--text-main);
 }
 .icon-map {
   width: 14px;
-  stroke: #4f4f4f;
+  stroke: var(--text-main);
 }
 
 /* Filter */
 .filter-container {
   display: none;
-  background-color: #fff;
+  background-color: var(--background);
 
   width: 100vw;
   height: 80vh;
@@ -158,7 +158,7 @@ p {
   justify-content: space-between;
 }
 .filter-container h3 {
-  color: #333;
+  color: var(--text-main);
   font-family: Mulish;
   font-size: 12px;
   font-style: normal;
@@ -208,7 +208,7 @@ p {
   gap: 0.25rem;
 }
 .guest-container > .item > label {
-  color: #333;
+  color: var(--text-main);
   font-family: Mulish;
   font-size: 14px;
   font-style: normal;
@@ -234,7 +234,7 @@ p {
   gap: 0.5rem;
 }
 .guest-container > .item .counter {
-  color: #333;
+  color: var(--text-main);
   font-family: Mulish;
   font-size: 14px;
   font-style: normal;
