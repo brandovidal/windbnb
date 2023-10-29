@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import './App.css'
 
 interface ToogleElement {
-  element: React.RefObject<HTMLElement| HTMLDivElement>
+  element: React.RefObject<HTMLElement | HTMLDivElement>
   show: boolean
 }
 
@@ -90,7 +90,7 @@ function App () {
           </section>
         </aside>
 
-        <section ref={filterRef} className="filter-container">
+        <section ref={filterRef} className="filter-container hidden">
           <div className="item">
             <h3>Edit your search</h3>
             <button className="btn-transparent" title='Close' onClick={closeClickHandle}>
@@ -147,7 +147,7 @@ function App () {
               </div>
             </section>
           </div>
-          <div ref={guestRef} className="item">
+          <div ref={guestRef} className="item hidden">
             <section className="guest-container">
               <div className="item">
                 <label>Adults</label>
@@ -173,7 +173,50 @@ function App () {
       </header>
 
       <main>
-
+        <div className='heading'>
+          <h2 className="title">Stays in Finland</h2>
+          <p className="stays">12+ stays</p>
+        </div>
+        <section className="stay-container">
+          <div className="item">
+            <img src="https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2255&q=80" alt="" className="image" />
+            <article>
+              <div className="tag">
+                <label className="badge">Super host</label>
+                <p className="description">Entire apartment . 2 beds</p>
+              </div>
+              <div className="rating">
+                <svg xmlns="http://www.w3.org/2000/svg" className="icon-star" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="none" fill="none"
+                  strokeLinecap="round" strokeLinejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                    strokeWidth="0" fill="currentColor" />
+                </svg>
+                <span>4.40</span>
+              </div>
+            </article>
+            <h5 className="title">Stylist apartment in center of the city</h5>
+          </div>
+          <div className="item">
+            <img src="https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2255&q=80" alt="" className="image" />
+            <article>
+              <div className="tag">
+                <label className="badge">Super host</label>
+                <p className="description">Entire apartment . 2 beds</p>
+              </div>
+              <div className="rating">
+                <svg xmlns="http://www.w3.org/2000/svg" className="icon-star" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="none" fill="none"
+                  strokeLinecap="round" strokeLinejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                    strokeWidth="0" fill="currentColor" />
+                </svg>
+                <span>4.40</span>
+              </div>
+            </article>
+            <h5 className="title">Stylist apartment in center of the city</h5>
+          </div>
+        </section>
       </main>
 
       <footer>
