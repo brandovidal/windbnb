@@ -77,8 +77,14 @@ function App () {
   const closeClickHandle = () => {
     toogleElement({ element: filterRef, show: false })
   }
+
   const searchFiltersClickHandle = () => {
-    console.log({ location, guests })
+    const filteredStayList = INITIAL_STAYS.filter(stay => stay.city === location && stay.maxGuests >= guests)
+    console.log({ INITIAL_STAYS, filteredStayList, location, guests })
+
+    const newStaysList = filteredStayList.length === 0 ? INITIAL_STAYS : filteredStayList
+    setStayList(newStaysList)
+
     closeClickHandle()
   }
 
@@ -190,7 +196,7 @@ function App () {
       <main>
         <div className='heading'>
           <h2 className="title">Stays in Finland</h2>
-          <p className="stays">12+ stays</p>
+          <p className="stays">{stayList.length}+ stays</p>
         </div>
         <section className="stay-container">
           {
