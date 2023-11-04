@@ -65,7 +65,13 @@ p {
 
 .card.filter {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+@media screen and (max-width: 768px) {
+  .card.filter {
+    display: flex;
+    flex-direction: column;
+  }
 }
 .card.filter > .item {
   width: 100%;
@@ -144,8 +150,8 @@ p {
 /* Filter */
 .filter-container {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 30px 150px 1fr 60px;
+  grid-template-columns: 5fr 5fr 2fr;
+  grid-template-rows: 2.25rem 5rem 1fr 4.5rem;
   padding: 1rem;
   gap: 1rem;
 
@@ -156,18 +162,71 @@ p {
   height: 90vh;
   background-color: var(--background);
 }
-.filter-container > .item:first-child {
-  display: flex;
+@media screen and (max-width: 768px) {
+  .filter-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2.25rem 10rem 1fr 4.5rem;
+  }
+}
+
+.filter-container .heading-item {
+  grid-column: 1/4;
+  grid-row: 1/2;
+
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
+@media screen and (max-width: 768px) {
+  .filter-container .heading-item {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+}
+
+.filter-container .filter-item {
+  grid-column: 1/3;
+  grid-row: 2/3;
+}
+@media screen and (max-width: 768px) {
+  .filter-container .filter-item {
+    grid-column: 1/2;
+    grid-row: 2/3;
+  }
+}
+
 .filter-container .search-item {
-  grid-row: 4/5;
+  grid-column: 3/4;
+  grid-row: 2/3;
+
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
+@media screen and (max-width: 768px) {
+  .filter-container .search-item {
+    grid-column: 1/2;
+    grid-row: 4/5;
+  }
+}
+
+.filter-container .location-item {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+.filter-container .guest-item {
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+@media screen and (max-width: 768px) {
+  .filter-container .guest-item {
+    grid-column: 1/2;
+    grid-row: 3/4;
+  }
+}
+
 .filter-container h3 {
   color: var(--text-main);
   font-family: Mulish;
@@ -207,6 +266,7 @@ p {
 
   width: 100%;
   margin-top: 1rem;
+  padding: 1rem;
   gap: 1rem;
 }
 .guest-container > .item {

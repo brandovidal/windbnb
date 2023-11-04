@@ -117,7 +117,7 @@ function App () {
         </aside>
 
         <section ref={filterRef} className="filter-container hidden">
-          <div className="item">
+          <div className="item heading-item">
             <h3>Edit your search</h3>
             <button className="btn-transparent" title='Close' onClick={closeClickHandle}>
               <svg xmlns="http://www.w3.org/2000/svg" className="icon-close" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none"
@@ -128,7 +128,7 @@ function App () {
               </svg>
             </button>
           </div>
-          <div className="item">
+          <div className="item filter-item">
             <div className="card filter">
               <div className="item" onClick={showLocationHandle}>
                 <label>location</label>
@@ -151,7 +151,7 @@ function App () {
               <span>Search</span>
             </button>
           </div>
-          <div ref={locationRef} className="item">
+          <div ref={locationRef} className="item location-item">
             <section className='location-container'>
               {
                 locations.map((location, index) => (
@@ -168,7 +168,7 @@ function App () {
               }
             </section>
           </div>
-          <div ref={guestRef} className="item hidden">
+          <div ref={guestRef} className="item guest-item hidden">
             <section className="guest-container">
               <div className="item">
                 <label>Adults</label>
