@@ -6,9 +6,9 @@
    Solution for a challenge from  <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
 </div>
 
-<!-- <div align="center">
+<div align="center">
   <h3>
-    <a href="https://input-component.pages.dev">
+    <a href="https://windbnb-6zn.pages.dev/">
       Demo
     </a>
     <span> | </span>
@@ -16,11 +16,11 @@
       Solution
     </a>
     <span> | </span>
-    <a href="https://devchallenges.io/solutions/uKe6QHEOf7svHqmltwgY">
+    <a href="https://legacy.devchallenges.io/challenges/3JFYedSOZqAxYuOCNmYD">
       Challenge
     </a>
   </h3>
-</div> -->
+</div>
 
 <!-- TABLE OF CONTENTS -->
 
