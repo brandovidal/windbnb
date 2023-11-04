@@ -66,7 +66,7 @@ This application/site was created as a submission to a [DevChallenges](https://d
 - ✅ User story: I can open the filter drawer
 - ✅ User story: I can filter properties by location and number of guests
 - ✅ User story: I can see the number of filtered items
-- [ ] User story: I can see pages following given designs
+- ✅ User story: I can see pages following given designs
 
 ## How To Use
 
